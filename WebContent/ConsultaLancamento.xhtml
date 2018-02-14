@@ -4,16 +4,76 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
-	<head>
+	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Lançamentos</title>
-	</head>
-	<body>
-		<h1>Lançamentos</h1>
-		<h:form id="formulario">
 		
+		<h:outputStylesheet library="css" name="sistema.css"/>
+		<h:outputStylesheet library="css" name="consnulta-lancamentos.css"/>
+	</h:head>
+	<h:body>
+		<h1>Lançamentos</h1>
+		<h:form id="frm">
+			<h:commandButton value="Novo Lançamento"/>
+			
+			<h:dataTable var="lancamento" value="#{consultaLancamentoBean.lancamentos}" 
+				width="100%" styleClass="grid" headerClass="cabecalho" rowClasses="cor-sim, cor-nao" 
+				columnClasses="tipo, pessoa, descricao, valor, vencimento, pagamento, situacao, acoes">
+				
+				<h:column>
+					<h:graphicImage value="/imagens/despesa.png"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">
+						Pessoa
+					</f:facet>
+					<h:outputText value="Padaria"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">
+						Descrição
+					</f:facet>
+					<h:outputText value="Pães"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">
+						Valor
+					</f:facet>
+					<h:outputText value="R$ 10,00" styleClass="despesa"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">
+						Vencimento
+					</f:facet>
+					<h:outputText value="05/02/2018"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">
+						Pagamento
+					</f:facet>
+					<h:outputText value="10/02/2018"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">
+						Situação
+					</f:facet>
+					<h:outputText value="Pago"/>
+				</h:column>
+				
+				<h:column>
+					<h:graphicImage value="/imagens/editar.png"/>
+					<h:graphicImage value="/imagens/excluir.png"/>
+				</h:column>
+				
+			</h:dataTable>
 		</h:form>
 	
 	
-	</body>
+	</h:body>
 </html>
