@@ -14,31 +14,36 @@
 	<h:body>
 		<h1>Novo Lançamento</h1>
 		<h:form id="frm">
-			<h:commandButton value="Novo"/>
-			<h:commandButton value="Consulta"/>
+			<h:button value="Novo" outcome="CadastroLancamento" />
+			<h:button value="Consulta" outcome="ConsultaLancamento" />
+			
+			<h:messages showDetail="false" showSummary="true"
+			styleClass="form-messages" errorClass="error"
+			infoClass="info" />
 			
 			<h:panelGrid columns="2" styleClass="form-grid"
 				columnClasses="label, campo">
 			
-				<h:outputLabel value="Tipo"/>
-				<h:selectOneRadio >
-					<f:selectItem itemLabel="Receita" />
-					<f:selectItem itemLabel="Despesa" />
+				<h:outputLabel value="Tipo" />
+				<h:selectOneRadio value="#{cadastroLancamentoBean.lancamento.tipo}" required="true" label="Tipo do lançamento">
+					<f:selectItems value="#{cadastroLancamentoBean.tiposLancamentos}"
+						var="tipoLancamento" itemLabel="#{tipoLancamento.descricao}" 
+						itemValue="#{tipoLancamento}" />
 				</h:selectOneRadio>
 				
 				<h:outputLabel value="Pessoa"/>
 				<h:selectOneMenu>
-					<f:selectItem itemValue="Ronaldo"/>
+					<f:selectItem itemValue="Ronaldo" />
 				</h:selectOneMenu>
 				
-				<h:outputLabel value="Descrição"/>
-				<h:inputText size="50"/>
+				<h:outputLabel value="Descrição" />
+				<h:inputText size="50" />
 				
-				<h:outputLabel value="Valor"/>
-				<h:inputText size="12"/>
+				<h:outputLabel value="Valor" />
+				<h:inputText size="12" />
 				
-				<h:outputLabel value="Data De Vencimento"/>
-				<h:inputText size="12"/>
+				<h:outputLabel value="Data De Vencimento" />
+				<h:inputText size="12" />
 				
 				<h:outputLabel/>
 				<h:panelGroup>
@@ -50,7 +55,7 @@
 				<h:inputText size="12"/>
 				
 				<h:outputLabel/>
-				<h:commandButton value="Cadastrar"/>
+				<h:commandButton value="Cadastrar" action="#{cadastroLancamentoBean.cadastrar}" />
 			
 			</h:panelGrid>
 
