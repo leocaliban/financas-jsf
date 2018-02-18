@@ -2,8 +2,10 @@ package com.leocaliban.financas.view;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import com.leocaliban.financas.model.Lancamento;
 import com.leocaliban.financas.model.TipoLancamento;
@@ -25,6 +27,9 @@ public class CadastroLancamentoBean implements Serializable {
 		System.out.println("Data pagamento: " + this.lancamento.getDataPagamento());
 		
 		this.lancamento = new Lancamento();
+		
+		String msg = "Cadastro efetuado com sucesso!";
+		FacesContext.getCurrentInstance().addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
 	}
 	
 	public TipoLancamento[] getTiposLancamentos() {
