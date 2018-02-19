@@ -32,30 +32,33 @@
 				<h:selectOneRadio value="#{cadastroLancamentoBean.lancamento.tipo}" required="true" label="Tipo do lançamento">
 				
 					<!-- value=indica onde será feito a busca dos elementos a serem mostrados -->
+					<!-- itemValue=é o objeto que será atribuído no value do radio -->
 					<f:selectItems value="#{cadastroLancamentoBean.tiposLancamentos}"
 						var="tipoLancamento" itemLabel="#{tipoLancamento.descricao}" 
 						itemValue="#{tipoLancamento}" />
 				</h:selectOneRadio>
 				
 				<h:outputLabel value="Pessoa"/>
-				<h:selectOneMenu>
-					<f:selectItem itemValue="Ronaldo" />
+				<h:selectOneMenu value="#{cadastroLancamentoBean.lancamento.pessoa}" required="true" label="Pessoa">
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroLancamentoBean.pessoas}" var="pessoa"
+						 itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"/>
 				</h:selectOneMenu>
 				
-				<h:outputLabel value="Descrição" />
-				<h:inputText size="50" value="#{cadastroLancamentoBean.lancamento.descricao}"
+				<h:outputLabel value="Descrição" for="descricao" />
+				<h:inputText id="descricao" size="50" value="#{cadastroLancamentoBean.lancamento.descricao}"
 					required="true" label="Descrição" />
 				
-				<h:outputLabel value="Valor" />
-				<h:inputText size="12" value="#{cadastroLancamentoBean.lancamento.valor}" 
+				<h:outputLabel value="Valor" for="valor" />
+				<h:inputText id="valor" size="12" value="#{cadastroLancamentoBean.lancamento.valor}" 
 					required="true" label="Valor">
 					<f:convertNumber locale="pt_BR" maxFractionDigits="2" minFractionDigits="2" />
 					<f:validateDoubleRange minimum="0" />
 				</h:inputText>
 				
-				<h:outputLabel value="Data De Vencimento" />
-				<h:inputText size="12" value="#{cadastroLancamentoBean.lancamento.dataVencimento}"
-					required="true" label="Data de vencimento">
+				<h:outputLabel value="Data De Vencimento" for="dataVencimento"/>
+				<h:inputText id="dataVencimento" size="12" value="#{cadastroLancamentoBean.lancamento.dataVencimento}"
+					required="true" label="Data de vencimento" >
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:inputText>
 				
@@ -65,8 +68,8 @@
 					<h:outputLabel value="Conta Paga" for="pagoCheckBox" />
 				</h:panelGroup>
 				
-				<h:outputLabel value="Data De Pagamento"/>
-				<h:inputText size="12" value="#{cadastroLancamentoBean.lancamento.dataPagamento}"
+				<h:outputLabel value="Data De Pagamento" for="dataPagamento"/>
+				<h:inputText id="dataPagamento" size="12" value="#{cadastroLancamentoBean.lancamento.dataPagamento}"
 					label="Data de pagamento">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:inputText>
