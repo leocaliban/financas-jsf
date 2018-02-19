@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 
 import com.leocaliban.financas.model.Lancamento;
 import com.leocaliban.financas.model.Pessoa;
@@ -27,6 +28,14 @@ public class CadastroLancamentoBean implements Serializable {
 	public void init() {
 		GestaoPessoas gestaoPessoas = new GestaoPessoas();
 		this.pessoas = gestaoPessoas.listarTodas();
+	}
+	
+	//Quando o checkbox do pagamento for modificado, este método irá capturar o evento e aplicar a alteração
+	public void lancamentoPagoModificado(ValueChangeEvent event) {
+		this.lancamento.setPago((Boolean)event.getNewValue());
+		this.lancamento.setDataPagamento(null);
+		//Força o ciclo de vida para a última fase para renderizar a resposta sem validar nada.
+		FacesContext.getCurrentInstance().renderResponse();
 	}
 	
 	public void cadastrar() {

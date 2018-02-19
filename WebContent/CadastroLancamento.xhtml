@@ -46,7 +46,7 @@
 				</h:selectOneMenu>
 				
 				<h:outputLabel value="Descrição" for="descricao" />
-				<h:inputText id="descricao" size="50" value="#{cadastroLancamentoBean.lancamento.descricao}"
+				<h:inputText id="descricao" size="40" value="#{cadastroLancamentoBean.lancamento.descricao}"
 					required="true" label="Descrição" />
 				
 				<h:outputLabel value="Valor" for="valor" />
@@ -64,15 +64,22 @@
 				
 				<h:outputLabel/>
 				<h:panelGroup>
-					<h:selectBooleanCheckbox id="pagoCheckBox" value="#{cadastroLancamentoBean.lancamento.pago}" />
+					<!-- immediate antecipa a validação -->
+					<h:selectBooleanCheckbox id="pagoCheckBox" value="#{cadastroLancamentoBean.lancamento.pago}" 
+						immediate="true" valueChangeListener="#{cadastroLancamentoBean.lancamentoPagoModificado}"
+						onchange="submit();" />
 					<h:outputLabel value="Conta Paga" for="pagoCheckBox" />
 				</h:panelGroup>
 				
-				<h:outputLabel value="Data De Pagamento" for="dataPagamento"/>
+				<!-- rendered - mostra o campo se o retorno de pago for true (quando a caixa estiver marcada) -->
+				<h:outputLabel value="Data De Pagamento" for="dataPagamento" rendered="#{cadastroLancamentoBean.lancamento.pago}"/>
 				<h:inputText id="dataPagamento" size="12" value="#{cadastroLancamentoBean.lancamento.dataPagamento}"
-					label="Data de pagamento">
+					label="Data de pagamento" rendered="#{cadastroLancamentoBean.lancamento.pago}">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 					<f:validator validatorId="com.leocaliban.DataFutura" />
+					<f:validator validatorId="com.leocaliban.CampoRequeridoCondicional" />
+					<!-- criação de um atributo para ser recuperado no validador -->
+					<f:attribute name="checado" value="#{cadastroLancamentoBean.lancamento.pago}" />
 				</h:inputText>
 				
 				<h:outputLabel/>

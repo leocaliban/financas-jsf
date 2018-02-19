@@ -5,12 +5,22 @@
     <param-name>javax.faces.PROJECT_STAGE</param-name>
     <param-value>Development</param-value>
   </context-param>
+  
+  <!-- Faz com que os comentários no código não sejam contados como componentes no Grid -->
   <context-param>
     <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
     <param-value>true</param-value>
   </context-param>
+  
+  <!-- Resolve problema de data, fazendo usar a timezone do nosso sistema -->
   <context-param>
   	<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  
+  <!-- Ativa os validadores nos campos vazios -->
+  <context-param>
+  	<param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
   	<param-value>true</param-value>
   </context-param>
   
