@@ -59,7 +59,5 @@ public class CadastroLancamentoBean implements Serializable {
 	public void setPessoas(List<Pessoa> pessoas) {
 		this.pessoas = pessoas;
 	}
-	
-	
-	
+
 }
