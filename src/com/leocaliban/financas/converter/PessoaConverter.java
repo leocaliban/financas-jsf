@@ -8,7 +8,7 @@ import javax.faces.convert.FacesConverter;
 import org.hibernate.Session;
 
 import com.leocaliban.financas.model.Pessoa;
-import com.leocaliban.financas.util.HibernateUtil;
+import com.leocaliban.financas.util.FacesUtil;
 
 //aponta o conversosr para a classe Pessoa
 @FacesConverter(forClass=Pessoa.class)
@@ -19,12 +19,9 @@ public class PessoaConverter implements Converter{
 		Pessoa retorno = null;
 		
 		if(value != null) {
-			Session session = HibernateUtil.getSession();
+			Session session = (Session)FacesUtil.getRequestAttribute("session");
 			
 			retorno = (Pessoa) session.get(Pessoa.class, new Integer(value));
-			
-			session.close();
-
 		}
 		return retorno;
 	}

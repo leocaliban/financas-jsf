@@ -12,13 +12,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 
 import com.leocaliban.financas.model.Lancamento;
 import com.leocaliban.financas.model.Pessoa;
 import com.leocaliban.financas.model.TipoLancamento;
-import com.leocaliban.financas.util.HibernateUtil;
+import com.leocaliban.financas.util.FacesUtil;
 
 @ManagedBean
 @ViewScoped
@@ -31,10 +30,11 @@ public class CadastroLancamentoBean implements Serializable {
 	@SuppressWarnings("unchecked")
 	@PostConstruct
 	public void init() {
-		Session session = HibernateUtil.getSession();
-		this.pessoas = session.createCriteria(Pessoa.class).addOrder(Order.asc("nome")).list();
 		
-		session.close();
+		Session session = (Session)FacesUtil.getRequestAttribute("session");
+
+		this.pessoas = session.createCriteria(Pessoa.class).addOrder(Order.asc("nome")).list();
+
 	}
 	
 	//Quando o checkbox do pagamento for modificado, este método irá capturar o evento e aplicar a alteração
@@ -46,14 +46,8 @@ public class CadastroLancamentoBean implements Serializable {
 	}
 	
 	public void cadastrar() {
-		Session session = HibernateUtil.getSession();
-		
-		Transaction transaction = session.beginTransaction();
+		Session session = (Session)FacesUtil.getRequestAttribute("session");
 		session.merge(this.lancamento);
-		transaction.commit();
-		
-		session.close();
-		
 		
 		this.lancamento = new Lancamento();
 		

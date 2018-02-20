@@ -6,15 +6,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 
 import com.leocaliban.financas.model.Lancamento;
 import com.leocaliban.financas.util.FacesUtil;
-import com.leocaliban.financas.util.HibernateUtil;
 
 @ManagedBean
 public class ConsultaLancamentoBean {
@@ -25,12 +22,9 @@ public class ConsultaLancamentoBean {
 	@SuppressWarnings("unchecked")
 	@PostConstruct
 	public void inicializar() {
-		Session session = HibernateUtil.getSession();
+		Session session = (Session)FacesUtil.getRequestAttribute("session");
 		
 		this.lancamentos = session.createCriteria(Lancamento.class).addOrder(Order.desc("dataVencimento")).list();
-		
-		session.close();
-		
 	}
 	
 	public void excluir() {
@@ -38,13 +32,9 @@ public class ConsultaLancamentoBean {
 			FacesUtil.adicionarMensagem(FacesMessage.SEVERITY_ERROR, "Lançamento PAGO não pode ser excluído.");
 		}
 		else {
-			Session session = HibernateUtil.getSession();
-			Transaction transaction = session.beginTransaction();
-			
+			Session session = (Session)FacesUtil.getRequestAttribute("session");
 			session.delete(lancamentoSelecionado);
-			transaction.commit();
-			session.close();
-			
+
 			//recarregar a lista após a exclusão
 			this.inicializar();
 			
