@@ -27,7 +27,7 @@ public class Lancamento implements Serializable {
 	private TipoLancamento tipo;
 	
 	@ManyToOne
-	@JoinColumn(name="cod_pessoa")
+	@JoinColumn(name="codigo_pessoa")
 	private Pessoa pessoa;
 	private String descricao;
 	private BigDecimal valor;
