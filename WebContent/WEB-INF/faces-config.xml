@@ -9,5 +9,19 @@
     <application>
     	<message-bundle>com.leocaliban.financas.resources.Messages</message-bundle>
 	</application>
+	
+	<!-- Aplicando navegação explícita -->
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>inicio</from-outcome>
+			<to-view-id>/CadastroLancamento.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>consulta</from-outcome>
+			<to-view-id>/ConsultaLancamento.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>
