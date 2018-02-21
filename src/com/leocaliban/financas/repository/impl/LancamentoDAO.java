@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import com.leocaliban.financas.model.Lancamento;
 import com.leocaliban.financas.repository.LancamentoRepository;
@@ -30,6 +31,18 @@ private Session session;
 	@Override
 	public void excluir(Lancamento lancamento) {
 		this.session.delete(lancamento);		
+	}
+
+	@Override
+	public Lancamento verificarLancamentoIgual(Lancamento lancamento) {
+		return (Lancamento)this.session.createCriteria(Lancamento.class)
+				.add(Restrictions.eq("tipo", lancamento.getTipo()))
+				.add(Restrictions.eq("pessoa", lancamento.getPessoa()))
+				//ilike compara sem case sensitive
+				.add(Restrictions.ilike("descricao", lancamento.getDescricao()))
+				.add(Restrictions.eq("valor", lancamento.getValor()))
+				.add(Restrictions.eq("dataVencimento", lancamento.getDataVencimento()))
+				.uniqueResult();
 	}
 
 }

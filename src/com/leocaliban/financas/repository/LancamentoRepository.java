@@ -7,8 +7,12 @@ import com.leocaliban.financas.model.Lancamento;
 public interface LancamentoRepository {
 	
 	public List<Lancamento> buscarTodos();
+	
+	public Lancamento verificarLancamentoIgual(Lancamento lancamento);
 		
 	public Lancamento salvar(Lancamento lancamento);
 	
 	public void excluir(Lancamento lancamento);
+	
+	
 }

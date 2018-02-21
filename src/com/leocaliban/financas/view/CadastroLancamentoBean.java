@@ -14,8 +14,10 @@ import javax.faces.event.ValueChangeEvent;
 import com.leocaliban.financas.model.Lancamento;
 import com.leocaliban.financas.model.Pessoa;
 import com.leocaliban.financas.model.TipoLancamento;
-import com.leocaliban.financas.repository.LancamentoRepository;
 import com.leocaliban.financas.repository.PessoaRepository;
+import com.leocaliban.financas.service.LancamentoService;
+import com.leocaliban.financas.service.exceptions.RegraNegocioException;
+import com.leocaliban.financas.util.FacesUtil;
 import com.leocaliban.financas.util.Repositorios;
 
 @ManagedBean
@@ -42,13 +44,15 @@ public class CadastroLancamentoBean implements Serializable {
 	}
 	
 	public void cadastrar() {
-		LancamentoRepository repository = this.repositorios.getLancamentos();
-		repository.salvar(this.lancamento);
-		
-		this.lancamento = new Lancamento();
-		
-		String msg = "Cadastro efetuado com sucesso!";
-		FacesContext.getCurrentInstance().addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
+		LancamentoService service = new LancamentoService(this.repositorios.getLancamentos());
+		try {
+			service.salvar(lancamento);
+			this.lancamento = new Lancamento();
+			FacesUtil.adicionarMensagem(FacesMessage.SEVERITY_INFO, "Cadastro efetuado com sucesso!");
+		} 
+		catch (RegraNegocioException e) {
+			FacesUtil.adicionarMensagem(FacesMessage.SEVERITY_ERROR, e.getMessage());
+		}
 	}
 	
 	public TipoLancamento[] getTiposLancamentos() {
