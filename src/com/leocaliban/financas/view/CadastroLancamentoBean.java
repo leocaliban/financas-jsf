@@ -12,29 +12,27 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 
 import com.leocaliban.financas.model.Lancamento;
 import com.leocaliban.financas.model.Pessoa;
 import com.leocaliban.financas.model.TipoLancamento;
+import com.leocaliban.financas.repository.PessoaRepository;
 import com.leocaliban.financas.util.FacesUtil;
+import com.leocaliban.financas.util.Repositorios;
 
 @ManagedBean
 @ViewScoped
 public class CadastroLancamentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	private Repositorios repositorios = new Repositorios();
 	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
 	private Lancamento lancamento = new Lancamento();
 	
-	@SuppressWarnings("unchecked")
 	@PostConstruct
 	public void init() {
-		
-		Session session = (Session)FacesUtil.getRequestAttribute("session");
-
-		this.pessoas = session.createCriteria(Pessoa.class).addOrder(Order.asc("nome")).list();
-
+		PessoaRepository repository = this.repositorios.getPessoas();
+		this.pessoas = repository.buscarTodos();
 	}
 	
 	//Quando o checkbox do pagamento for modificado, este método irá capturar o evento e aplicar a alteração

@@ -5,25 +5,26 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import org.hibernate.Session;
-
 import com.leocaliban.financas.model.Pessoa;
-import com.leocaliban.financas.util.FacesUtil;
+import com.leocaliban.financas.repository.PessoaRepository;
+import com.leocaliban.financas.util.Repositorios;
 
 //aponta o conversosr para a classe Pessoa
 @FacesConverter(forClass=Pessoa.class)
 public class PessoaConverter implements Converter{
+	
+	private Repositorios repositorios = new Repositorios();
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Pessoa retorno = null;
+		Pessoa pessoaRetorno = null;
 		
 		if(value != null) {
-			Session session = (Session)FacesUtil.getRequestAttribute("session");
+			PessoaRepository repository = this.repositorios.getPessoas();
 			
-			retorno = (Pessoa) session.get(Pessoa.class, new Integer(value));
+			pessoaRetorno = repository.buscarPorCodigo(new Integer(value));
 		}
-		return retorno;
+		return pessoaRetorno;
 	}
 
 	@Override
@@ -33,5 +34,4 @@ public class PessoaConverter implements Converter{
 		}
 		return null;
 	}
-
 }
