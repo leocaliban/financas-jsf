@@ -8,6 +8,8 @@ public interface LancamentoRepository {
 	
 	public List<Lancamento> buscarTodos();
 	
+	public Lancamento buscarPorCodigo(Integer codigo);
+	
 	public Lancamento verificarLancamentoIgual(Lancamento lancamento);
 		
 	public Lancamento salvar(Lancamento lancamento);

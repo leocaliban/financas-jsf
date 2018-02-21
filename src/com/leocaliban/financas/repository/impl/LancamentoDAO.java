@@ -22,6 +22,11 @@ private Session session;
 	public List<Lancamento> buscarTodos() {
 		return session.createCriteria(Lancamento.class).addOrder(Order.desc("dataVencimento")).list();
 	}
+	
+	@Override
+	public Lancamento buscarPorCodigo(Integer codigo) {
+		return (Lancamento)this.session.get(Lancamento.class, codigo);
+	}
 
 	@Override
 	public Lancamento salvar(Lancamento lancamento) {
@@ -44,5 +49,4 @@ private Session session;
 				.add(Restrictions.eq("dataVencimento", lancamento.getDataVencimento()))
 				.uniqueResult();
 	}
-
 }

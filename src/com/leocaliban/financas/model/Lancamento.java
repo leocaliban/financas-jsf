@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Lancamento implements Serializable {
+public class Lancamento implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -110,5 +110,9 @@ public class Lancamento implements Serializable {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+	
+	public Object clone() throws CloneNotSupportedException{
+		return super.clone();
 	}
 }
