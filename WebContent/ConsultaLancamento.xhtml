@@ -88,6 +88,8 @@
 						<h:graphicImage value="/imagens/excluir.png"/>
 						<f:setPropertyActionListener value="#{lancamento}" 
 							target="#{consultaLancamentoBean.lancamentoSelecionado}" />
+							
+						<f:ajax render="@form" />
 					</h:commandLink>
 				</h:column>
 				

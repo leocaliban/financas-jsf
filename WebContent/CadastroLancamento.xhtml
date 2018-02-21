@@ -28,7 +28,7 @@
 			infoClass="info" />
 
 			<h:panelGrid columns="2" styleClass="form-grid"
-				columnClasses="label, campo">
+				columnClasses="label, campo" id="panel">
 				
 				<h:outputLabel value="Tipo" />
 				
@@ -71,7 +71,7 @@
 					<!-- immediate antecipa a validação -->
 					<h:selectBooleanCheckbox id="pagoCheckBox" value="#{cadastroLancamentoBean.lancamento.pago}" 
 						immediate="true" valueChangeListener="#{cadastroLancamentoBean.lancamentoPagoModificado}"
-						onchange="submit();" />
+						onchange="jsf.ajax.request(this, event, {execute: '@form', render: 'frm:panel'})" />
 					<h:outputLabel value="Conta Paga" for="pagoCheckBox" />
 				</h:panelGroup>
 				
@@ -87,7 +87,9 @@
 				</h:inputText>
 				
 				<h:outputLabel/>
-				<h:commandButton value="Cadastrar" action="#{cadastroLancamentoBean.salvar}" />
+				<h:commandButton value="Cadastrar" action="#{cadastroLancamentoBean.salvar}">
+					<f:ajax execute="@form" render="@all" />
+				</h:commandButton>
 			
 			</h:panelGrid>
 
