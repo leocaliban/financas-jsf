@@ -7,24 +7,22 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-
 import com.leocaliban.financas.model.Lancamento;
+import com.leocaliban.financas.repository.LancamentoRepository;
 import com.leocaliban.financas.util.FacesUtil;
+import com.leocaliban.financas.util.Repositorios;
 
 @ManagedBean
 public class ConsultaLancamentoBean {
 	
+	private Repositorios repositorios = new Repositorios();
 	private List<Lancamento> lancamentos = new ArrayList<Lancamento>();
 	private Lancamento lancamentoSelecionado;
 	
-	@SuppressWarnings("unchecked")
 	@PostConstruct
 	public void inicializar() {
-		Session session = (Session)FacesUtil.getRequestAttribute("session");
-		
-		this.lancamentos = session.createCriteria(Lancamento.class).addOrder(Order.desc("dataVencimento")).list();
+		LancamentoRepository repository = this.repositorios.getLancamentos();
+		this.lancamentos = repository.buscarTodos();
 	}
 	
 	public void excluir() {
@@ -32,8 +30,8 @@ public class ConsultaLancamentoBean {
 			FacesUtil.adicionarMensagem(FacesMessage.SEVERITY_ERROR, "Lançamento PAGO não pode ser excluído.");
 		}
 		else {
-			Session session = (Session)FacesUtil.getRequestAttribute("session");
-			session.delete(lancamentoSelecionado);
+			LancamentoRepository repository = this.repositorios.getLancamentos();
+			repository.excluir(this.lancamentoSelecionado);
 
 			//recarregar a lista após a exclusão
 			this.inicializar();

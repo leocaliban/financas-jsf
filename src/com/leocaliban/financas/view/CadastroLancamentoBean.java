@@ -11,13 +11,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
-import org.hibernate.Session;
-
 import com.leocaliban.financas.model.Lancamento;
 import com.leocaliban.financas.model.Pessoa;
 import com.leocaliban.financas.model.TipoLancamento;
+import com.leocaliban.financas.repository.LancamentoRepository;
 import com.leocaliban.financas.repository.PessoaRepository;
-import com.leocaliban.financas.util.FacesUtil;
 import com.leocaliban.financas.util.Repositorios;
 
 @ManagedBean
@@ -44,8 +42,8 @@ public class CadastroLancamentoBean implements Serializable {
 	}
 	
 	public void cadastrar() {
-		Session session = (Session)FacesUtil.getRequestAttribute("session");
-		session.merge(this.lancamento);
+		LancamentoRepository repository = this.repositorios.getLancamentos();
+		repository.salvar(this.lancamento);
 		
 		this.lancamento = new Lancamento();
 		
