@@ -20,4 +20,10 @@ public class FacesUtil {
 		HttpServletRequest request = (HttpServletRequest)externalContext.getRequest();
 		return request.getAttribute(nome);
 	}
+	
+	public static String getMensagemI18n(String chave) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String msg = facesContext.getApplication().getResourceBundle(facesContext, "msg").getString(chave);
+		return msg;
+	}
 }

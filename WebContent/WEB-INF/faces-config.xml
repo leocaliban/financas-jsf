@@ -7,7 +7,20 @@
     version="2.0">
     
     <application>
-    	<message-bundle>com.leocaliban.financas.resources.Messages</message-bundle>
+    	<message-bundle>com.leocaliban.financas.resources.validacao</message-bundle>
+    	
+    	<resource-bundle>
+    		<base-name>com.leocaliban.financas.resources.sistema</base-name>
+    		<!-- variavel que será usada para atribuir as traduções [msg.nome] -->
+    		<var>msg</var>
+    	</resource-bundle>
+    	
+    	<locale-config>
+    		<default-locale>pt</default-locale>
+    		<supported-locale>pt</supported-locale>
+    		<supported-locale>en</supported-locale>
+    		<supported-locale>de</supported-locale>
+    	</locale-config>
 	</application>
 	
 	<!-- Aplicando navegação explícita -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15189926101180" configfile="/FinancasJSF/WebContent/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="*" id="pf15192395624630" outlinks="pf15192395624631 pf15192398149225" path="*"/>
-  <nodes xsi:type="pageflow:PFPage" name="CadastroLancamento.xhtml" id="pf15192395624632" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15192395624631" path="/CadastroLancamento.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="CadastroLancamento.xhtml" id="pf15192395624632" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15192395624631" path="/CadastroLancamento.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="ConsultaLancamento.xhtml" id="pf15192396562094" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf15192398149225" path="/ConsultaLancamento.xhtml"/>
   <links id="pf15192395624631" target="pf15192395624632" source="pf15192395624630" outcome="inicio" redirect="true"/>
   <links id="pf15192398149225" target="pf15192396562094" source="pf15192395624630" outcome="consulta" redirect="true"/>
