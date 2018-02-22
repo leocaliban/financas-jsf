@@ -2,7 +2,8 @@
 		xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:h="http://java.sun.com/jsf/html"
 		xmlns:ui="http://java.sun.com/jsf/facelets"
-		xmlns:f="http://java.sun.com/jsf/core">
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:c="http://java.sun.com/jsf/composite/componentes">
 	
 	<ui:define name="titulo">Lançamentos</ui:define>
 	<ui:define name="conteudo">
@@ -44,9 +45,7 @@
 					<f:facet name="header">
 						Valor
 					</f:facet>
-					<h:outputText value="#{lancamento.valor}" styleClass="#{lancamento.tipo.toString().toLowerCase()}">
-						<f:convertNumber locale="pt_BR" currencySymbol="R$" type="currency" />
-					</h:outputText>
+					<c:outputCurrency value="#{lancamento.valor}" styleClass="#{lancamento.tipo.toString().toLowerCase()}" />		
 				</h:column>
 				
 				<h:column>
