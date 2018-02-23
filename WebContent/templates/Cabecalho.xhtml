@@ -13,7 +13,9 @@
 			</h:outputFormat>
 			
 			<h:link outcome="Home">#{msg.inicio}</h:link>
-			<h:link outcome="consulta">#{msg.lancamentos}</h:link>
+			<h:link outcome="consulta" rendered="#{request.isUserInRole('consulta')}">#{msg.lancamentos}</h:link>
+			<h:link outcome="inicio" 
+				rendered="#{request.isUserInRole('cadastro') and not request.isUserInRole('consulta')}">Cadastro</h:link>
 			<h:commandLink action="#{segurancaBean.logout}">#{msg.logout}</h:commandLink>
 		</h:form>
 	</div>

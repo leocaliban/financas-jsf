@@ -7,5 +7,5 @@
 		connectionName="root" connectionPassword=""
 		userTable="usuario" userNameCol="nome_usuario" 
 		userCredCol="senha" userRoleTable="permissao_usuario"
-		roleNameCol="nome_permissao" />
+		roleNameCol="nome_permissao" digest="MD5" />
 </Context>

@@ -14,7 +14,7 @@
 			<h:form id="frm">
 				<!-- Botões simples (Enter na página não aciona eles) -->
 				<h:button value="Novo" outcome="inicio" />
-				<h:button value="Consulta" outcome="consulta" />
+				<h:button value="Consulta" outcome="consulta" rendered="#{request.isUserInRole('consulta')}"/>
 				
 				<!-- Mensagens de erros -->
 				<h:messages showDetail="false" showSummary="true"

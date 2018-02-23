@@ -100,4 +100,10 @@
   	</auth-constraint>
   </security-constraint>
   
+  <!-- Redirecionamento para erro 403 ou qualquer outro -->
+  <error-page>
+  	<error-code>403</error-code>
+  	<location>/403.xhtml</location>
+  </error-page>
+  
 </web-app>
