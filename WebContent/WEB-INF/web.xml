@@ -51,5 +51,53 @@
   	<welcome-file>Home.xhtml</welcome-file>
   </welcome-file-list>
   
+  <!-- Define o método de autenticação, FORM é por formulário criado personalizado -->
+  <login-config>
+  	<auth-method>FORM</auth-method>
+  	<form-login-config>
+  		<form-login-page>/Login.xhtml</form-login-page>
+  		<form-error-page>/Login.xhtml</form-error-page>
+  	</form-login-config>
+  </login-config>
+  
+  <!-- Define quantos níveis de acesso a aplicação vai ter -->
+  <security-role>
+  	<role-name>cadastro</role-name>
+  </security-role>
+    <security-role>
+  	<role-name>consulta</role-name>
+  </security-role>
+  
+  <!-- define qual role-name vai ter acesso a url-pattern -->
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>Cadastro lançamento</web-resource-name>
+  		<url-pattern>/CadastroLancamento.xhtml</url-pattern>
+  	</web-resource-collection>
+  	<auth-constraint>
+  		<role-name>cadastro</role-name>
+  	</auth-constraint>
+  </security-constraint>
+  
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>Consulta lançamento</web-resource-name>
+  		<url-pattern>/ConsultaLancamento.xhtml</url-pattern>
+  	</web-resource-collection>
+  	<auth-constraint>
+  		<role-name>consulta</role-name>
+  	</auth-constraint>
+  </security-constraint>
+  
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>Home</web-resource-name>
+  		<url-pattern>/Home.xhtml</url-pattern>
+  	</web-resource-collection>
+  	<auth-constraint>
+  		<role-name>cadastro</role-name>
+  		<role-name>consulta</role-name>
+  	</auth-constraint>
+  </security-constraint>
   
 </web-app>
